@@ -1,0 +1,23 @@
+.auth-card{ 
+    width: 400px;
+    margin: auto;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    
+}
+.auth-btn{
+    margin-bottom: 4px !important;
+    width: 100%;
+}
+.auth-img{
+    margin: 4px;
+}
+.auth-input{
+    width: 100%;
+    margin-bottom: 6px !important;
+}
+.auth-link{
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+}
