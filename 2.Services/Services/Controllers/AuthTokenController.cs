@@ -13,17 +13,15 @@ using Services.Model;
 namespace Services.Controllers
 {
     [Route("api/[controller]")]
-    public class TokenController : Controller
+    public class AuthTokenController : Controller
     {
-       private IConfiguration _config;
+       private IConfiguration _config; 
 
-       public TokenController(IConfiguration config){
+       public AuthTokenController(IConfiguration config){
            _config=config;
        }
-
-       [AllowAnonymous]
-       [HttpPost]
-       public IActionResult CreateToken([FromBody]LoginModel login)
+       [HttpPost("token")]
+       public IActionResult Token([FromBody]LoginModel login)
        {
             IActionResult response = Unauthorized();
             var user = Authenticate(login);
@@ -54,11 +52,12 @@ namespace Services.Controllers
         {
             UserModel user = null;
 
-            if (login.Username == "mario" && login.Password == "secret")
+            if (login.Username == "admin" && login.Password == "1234")
             {
-                user = new UserModel { Name = "Mario Rossi", Email = "mario.rossi@domain.com"};
+                user = new UserModel { Name = "Mouad Elabbade", Email = "elabbademouad@gmail.com"};
             }
             return user;
         }
+        
     }
 }

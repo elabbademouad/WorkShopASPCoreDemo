@@ -10,7 +10,10 @@ import Logo from './../../../logo.png';
 import { Link } from "react-router-dom";
 
 class Login extends React.Component {
-  
+  constructor(){
+    super();
+    fetch("http://localhost:5000/api/AuthToken/token")
+  }
   render(){
     return (
       <div className="auth-card">
