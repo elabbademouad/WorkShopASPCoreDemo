@@ -20,31 +20,31 @@ namespace Services.Controllers
        public AuthTokenController(IConfiguration config){
            _config=config;
        }
+       [AllowAnonymous]
        [HttpPost("token")]
-       public IActionResult Token([FromBody]LoginModel login)
-       {
+       public IActionResult Token([FromForm] LoginModel login)
+       { 
             IActionResult response = Unauthorized();
             var user = Authenticate(login);
 
             if (user != null)
             {
-                var tokenString = BuildToken(user);
+                var tokenString = BuildToken();
                 response = Ok(new { token = tokenString });
             }
 
             return response;
         }
 
-        private string BuildToken(UserModel user)
+        private string BuildToken()
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
             _config["Jwt:Issuer"],
-            expires: DateTime.Now.AddMinutes(30),
+            expires: DateTime.Now.AddMonths(1),
             signingCredentials: creds);
-
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 

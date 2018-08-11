@@ -8,12 +8,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormGroup  from '@material-ui/core/FormGroup'
 import Logo from './../../../logo.png';
 import { Link } from "react-router-dom";
-
+import {AuthenticationServices} from './../../../ServiceComponent/AuthenticationServices'
+import  LoginModel  from '../../../Common/LoginModel';
 class Login extends React.Component {
-  constructor(){
+   constructor(){
     super();
-    fetch("http://localhost:5000/api/AuthToken/token")
+    var service=new AuthenticationServices();
+    var token= service.createToken(new LoginModel("admin","1234"));
+    token.then(result=>console.log(result.token))
+
   }
+  componentDidMount(){
+    
+    }
   render(){
     return (
       <div className="auth-card">
@@ -35,4 +42,4 @@ class Login extends React.Component {
     );
   }
 }
-export default Login;
+export default Login ;

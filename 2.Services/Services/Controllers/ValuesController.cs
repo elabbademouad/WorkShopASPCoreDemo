@@ -11,7 +11,7 @@ namespace Services.Controllers
     public class ValuesController : Controller
     {
         // GET api/values
-        [HttpGet]
+        [HttpGet("get"),Authorize]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
