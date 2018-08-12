@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using DataAccess.DataContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services
 {
@@ -19,6 +21,10 @@ namespace Services
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            using (var dbContext=new WorkShopDbContext())
+            {
+                dbContext.Database.Migrate();
+            }
         }
 
         public IConfiguration Configuration { get; }
