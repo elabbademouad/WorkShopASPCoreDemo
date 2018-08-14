@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from "./UIComponent/authentication/login/login"
-import Register from "./UIComponent/authentication/register/register"
+import Login from "./UIComponent/authentication/login"
+import Register from "./UIComponent/authentication/register"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 class Index extends React.Component{
     render(){

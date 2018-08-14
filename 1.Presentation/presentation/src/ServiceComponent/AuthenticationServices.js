@@ -1,6 +1,6 @@
 export class AuthenticationServices{
-   async createToken(login){
-        var response= await fetch("http://localhost:5000/api/AuthToken/token",{
+    async Token(login){
+        var response= await fetch("http://localhost:5000/api/Authentication/token",{
           method: "POST",
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'    
@@ -9,6 +9,17 @@ export class AuthenticationServices{
         });
         var data= await response.json();           
         return  data;
+    }
+    async Register(register){
+      var response= await fetch("http://localhost:5000/api/Authentication/register",{
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'    
+        },
+        body:`FirstName=${register.Firstname}&LastName=${register.lastname}&UserName=${register.Username}&Password=${register.Password}`
+      });
+      //var data= await response.json();           
+      return  response;
     }
 }
 /*

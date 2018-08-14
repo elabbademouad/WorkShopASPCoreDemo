@@ -6,17 +6,11 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormGroup  from '@material-ui/core/FormGroup'
-import Logo from './../../../logo.png';
+import Logo from './../../logo.png';
 import { Link } from "react-router-dom";
-import {AuthenticationServices} from './../../../ServiceComponent/AuthenticationServices'
-import  LoginModel  from '../../../Common/LoginModel';
 class Login extends React.Component {
    constructor(){
     super();
-    var service=new AuthenticationServices();
-    var token= service.createToken(new LoginModel("admin","1234"));
-    token.then(result=>console.log(result.token))
-
   }
   componentDidMount(){
     
@@ -30,8 +24,8 @@ class Login extends React.Component {
                   <div >
                     <img src={Logo} alt="" />
                   </div>
-                  <TextField   label="User name"  className="auth-input"/>
-                  <TextField   label="Password" type="password"  className="auth-input"  />    
+                  <TextField  label="User name"  className="auth-input"/>
+                  <TextField  label="Password" type="password"  className="auth-input"  />    
                   <FormControlLabel  control={<Checkbox color="primary"  />}  label="Remember me"  />
                   <Button className="auth-btn" variant="contained"  color="primary" >Login</Button>     
                   <Button className="auth-btn" variant="contained"  color="primary" ><Link className="auth-link" to="/register">Register</Link></Button>
