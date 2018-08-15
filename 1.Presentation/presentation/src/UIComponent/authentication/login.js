@@ -9,12 +9,7 @@ import FormGroup  from '@material-ui/core/FormGroup'
 import Logo from './../../logo.png';
 import { Link } from "react-router-dom";
 class Login extends React.Component {
-   constructor(){
-    super();
-  }
-  componentDidMount(){
-    
-    }
+   
   render(){
     return (
       <div className="auth-card">

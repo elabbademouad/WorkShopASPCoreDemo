@@ -8,10 +8,11 @@ import FormGroup  from '@material-ui/core/FormGroup'
 import Logo from './../../logo.png';
 import RegisterModel from './../../Common/RegisterModel';
 import {AuthenticationServices} from './../../ServiceComponent/AuthenticationServices'
+import Message from './../message';
 class Register extends React.Component{
     constructor(){
         super();
-        this.state={redirect:false};
+        this.state={redirect:false,error:false};
         this.submit=this.submit.bind(this);
         this.authService=new AuthenticationServices();
     }
@@ -25,37 +26,46 @@ class Register extends React.Component{
         );
         var response=this.authService.Register(registerModel);
         response.then(data=>{
-            debugger
-            if(data.status==200){
-                this.setState({redirect:true});
+            if(data.status===200){
+                this.setState({redirect:true,error:false});
+            }else
+            {
+                this.setState({redirect : false,error:true});
             }
         
         });
-
     }
     render(){
         if(this.state.redirect)
         {
             return <Redirect to='/' />
-        }   
+        }
+        var message=null;
+        if(this.state.error){
+               
+            message=<Message variant="error" opened={this.state.error}  message="username is already taken" duration={6000}vertical="top" horizontal="center"/>;
+               
+        }
         return (
-            <div className="auth-card">
-                <Card>
-                    <CardContent>
-                        <FormGroup row >
-                            <div >
-                            <img src={Logo} alt="" />
-                            </div>
-                            
-                            <TextField id="register-firstname" required label="First name"  className="auth-input"/>
-                            <TextField id="register-lastname" required  label="Last name"  className="auth-input"/>
-                            <TextField id="register-username" required label="Username"  className="auth-input"/>
-                            <TextField id="register-password" required  label="Password" type="password"  className="auth-input"  />    
-                            <TextField id="register-confirmpassword" required label="Confirm password" type="password"  className="auth-input"  />
-                            <Button className="auth-btn" onClick={this.submit} variant="contained" color="primary" >Submit</Button>
-                        </FormGroup>
-                    </CardContent>
-                </Card>
+            <div>
+                <div className="auth-card">
+                    <Card>
+                        <CardContent>
+                            <FormGroup row >
+                                <div >
+                                <img src={Logo} alt="" />
+                                </div>
+                                <TextField id="register-firstname" required label="First name"  className="auth-input"/>
+                                <TextField id="register-lastname" required  label="Last name"  className="auth-input"/>
+                                <TextField id="register-username" required label="Username"  className="auth-input"/>
+                                <TextField id="register-password" required  label="Password" type="password"  className="auth-input"  />    
+                                <TextField id="register-confirmpassword" required label="Confirm password" type="password"  className="auth-input"  />
+                                <Button className="auth-btn" onClick={this.submit} variant="contained" color="primary" >Submit</Button>
+                            </FormGroup>
+                        </CardContent>
+                    </Card> 
+                </div>
+                {message}
             </div>
         );
     }
